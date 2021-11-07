@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  Calculator
-//
-//  Created by Angela Yu on 10/09/2019.
-//  Copyright © 2019 London App Brewery. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -28,16 +20,11 @@ class ViewController: UIViewController {
         isFinishTypingNumber = true
         
         if let calcMethod = sender.currentTitle {
-            switch calcMethod {
-            case "AC":
-                displayLabel.text = "0"
-            case "+/-":
-                displayvalue *= -1
-            case "%":
-                displayvalue *= 0.01
-            default:
-                print("default")
+            let calculator = CalculatorLogic(number: displayvalue)
+            guard let result = calculator.calculate(symbol: calcMethod) else {
+                fatalError("Result of calculation is nil")
             }
+            displayvalue = result
         }
     }
 

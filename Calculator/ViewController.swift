@@ -11,23 +11,30 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var displayLabel: UILabel!
     private var isFinishTypingNumber = true
+    private var displayvalue: Double {
+        get {
+            guard let number = Double(displayLabel.text!) else {
+                fatalError("Cannot convert current display value String to Bouble")
+            }
+            return number
+        }
+        set {
+            displayLabel.text = String(newValue)
+        }
+    }
     
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
-       isFinishTypingNumber = true
-        
-        guard let number = Double(displayLabel.text!) else {
-            fatalError("Cannot convert current display value String to Bouble")
-        }
+        isFinishTypingNumber = true
         
         if let calcMethod = sender.currentTitle {
             switch calcMethod {
             case "AC":
                 displayLabel.text = "0"
             case "+/-":
-                displayLabel.text = String(number * -1)
+                displayvalue *= -1
             case "%":
-                displayLabel.text = String(number / 100)
+                displayvalue *= 0.01
             default:
                 print("default")
             }

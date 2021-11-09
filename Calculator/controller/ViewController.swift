@@ -14,13 +14,13 @@ class ViewController: UIViewController {
             displayLabel.text = String(newValue)
         }
     }
-    
+    private var calculator = CalculatorLogic()
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         isFinishTypingNumber = true
         
         if let calcMethod = sender.currentTitle {
-            let calculator = CalculatorLogic(number: displayvalue)
+            calculator.setNumber(displayvalue)
             guard let result = calculator.calculate(symbol: calcMethod) else {
                 fatalError("Result of calculation is nil")
             }
